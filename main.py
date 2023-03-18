@@ -4,33 +4,23 @@ import requests
 import json
 import os
 from typing import Any, Optional
+import openai
 
 app = Flask(__name__)
 
 
 def chat_gpt_request(prompt: Any) -> Optional[Any]:
-    api_key: str = os.environ['API_KEY']
-    headers = {
-        "Authorization": f"Bearer {api_key}",
-        "Content-Type": "application/json"
-    }
-    data = {
-        "model": "gpt-4",
-        "prompt": prompt,
-        "max-tokens": 100,
-        "n": 1,
-        "stop": None,
-        "temperature": 1.0,
-    }
-
-    response = requests.post("https://api.openai.com/v1/engines/davinci-codex/completions",
-                             headers=headers, data=json.dumps(data))
-
-    if response.status_code == 200:
-        return response.json()["choices"][0]["text"].strip()
-    else:
-        print(f"Error {response.status_code}: {response.text}")
-        return None
+    openai.api_key = os.environ['API_KEY']
+    engine = "text-davinci-002"
+    response = openai.Completion.create(
+        engine=engine,
+        prompt="prompt",
+        max_tokens=50,
+        n=1,
+        stop=None,
+        temperature=0.7,
+    )
+    return response.choices[0].text
 
 
 @app.route('/webhook', methods=['POST'])
