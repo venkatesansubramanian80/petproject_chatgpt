@@ -23,6 +23,3 @@ def performRequestWithStreaming():
         if event.data != '[DONE]':
             print(json.loads(event.data)['choices'][0]['text'], end="", flush=True),
 
-
-if __name__ == '__main__':
-    performRequestWithStreaming()
