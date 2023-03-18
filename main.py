@@ -35,7 +35,7 @@ def chat_gpt_request(prompt: Any) -> Optional[Any]:
 
 @app.route('/webhook', methods=['POST'])
 def webhook():
-    incoming_msg = requests.values.get('Body', '').strip()
+    incoming_msg = request.form.get('Body', '').strip()
     response_msg = chat_gpt_request(incoming_msg)
 
     twiml = MessagingResponse()
