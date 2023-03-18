@@ -14,7 +14,7 @@ def chat_gpt_request(prompt: Any) -> Optional[Any]:
     engine = "text-davinci-002"
     response = openai.Completion.create(
         engine=engine,
-        prompt="prompt",
+        prompt=prompt,
         max_tokens=50,
         n=1,
         stop=None,
@@ -30,7 +30,7 @@ def webhook():
 
     twiml = MessagingResponse()
     twiml.message(response_msg)
-    return response_msg
+    return str(twiml)
 
 
 @app.route('/')
