@@ -15,9 +15,9 @@ def chat_gpt_request(prompt: Any) -> Optional[Any]:
     response = openai.Completion.create(
         engine=engine,
         prompt=prompt,
-        max_tokens=50,
+        max_tokens=2048,
         n=1,
-        stop=None,
+        stop="</s>",
         temperature=0.7,
     )
     return response.choices[0].text
