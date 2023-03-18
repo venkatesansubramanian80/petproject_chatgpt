@@ -30,7 +30,7 @@ def webhook():
 
     twiml = MessagingResponse()
     twiml.message(response_msg)
-    return str(twiml)
+    return response_msg
 
 
 @app.route('/')
