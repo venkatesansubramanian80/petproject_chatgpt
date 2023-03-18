@@ -1,3 +1,0 @@
-def performRequestWithStreaming():
-    print("Hello")
-
